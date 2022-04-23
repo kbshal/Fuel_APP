@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'UI/home_card.dart';
+import 'widgets/home_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,8 +9,15 @@ class HomePage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-          title: const Text("Fuel Prices"),
-          backgroundColor: const Color.fromARGB(255, 12, 146, 0),
+          centerTitle: true,
+          title: Text(
+            "Fuel Prices",
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge!
+                .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          backgroundColor:Colors.red,
           leading: Builder(builder: (BuildContext context) {
             return IconButton(
               onPressed: () {
