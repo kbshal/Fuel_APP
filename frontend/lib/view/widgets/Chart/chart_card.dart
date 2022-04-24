@@ -17,6 +17,7 @@ class ChartCard extends StatelessWidget {
       ChartData(5, 185),
       ChartData(6, 100),
       ChartData(7, 200),
+      ChartData(8, 160),
     ];
 
     final List<String> dropDownItems = ["Petrol", "Diesel", "Kerosene", "LPG"];
@@ -25,7 +26,7 @@ class ChartCard extends StatelessWidget {
       child: Container(
         height: size.height * 0.5,
         width: size.width,
-        color: Color(0xff403b58),
+        color: const Color(0xff403b58),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -70,13 +71,15 @@ Widget linechart(BuildContext context, List<ChartData> chartData) {
                   .toList(),
               isCurved: true,
               color: Colors.white,
-              barWidth: 5,
+              barWidth: 3,
               dotData: FlDotData(
                 show: true,
               ),
             )
           ],
         ),
+        swapAnimationDuration: const Duration(milliseconds: 500),
+        swapAnimationCurve: Curves.linear,
       ),
     ),
   );
@@ -86,6 +89,9 @@ Widget dropDownItem(String dropDownValue, List<String> dropDownItems) {
   return Padding(
     padding: const EdgeInsets.only(left: 12.0),
     child: DropdownButton(
+      iconEnabledColor: Colors.white,
+      style:const TextStyle(color: Colors.white),
+        dropdownColor:const Color.fromARGB(255, 47, 46, 65),
         borderRadius: BorderRadius.circular(12.0),
         elevation: 10,
         value: dropDownValue,
@@ -106,14 +112,33 @@ class LineTitles {
           sideTitles: SideTitles(
             showTitles: true,
             reservedSize: 30.0,
+            getTitlesWidget: (value, meta) {
+                return Padding(
+                  padding: const EdgeInsets.only(right:6.0),
+                  child: Text(value.toString(),
+                  style:const TextStyle(
+                    color: Colors.white
+                  ),),
+                );
+              },
             interval: 1,
           ),
         ),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
-            showTitles: true,
-            reservedSize: 40.0,
-          ),
+              showTitles: true,
+              reservedSize: 50.0,
+              getTitlesWidget: (value, meta) {
+                
+                return Padding(
+                  padding: const EdgeInsets.only(right:6.0),
+                  child: Text(value.toString(),
+                  style:const TextStyle(
+                    color: Colors.white
+                  ),),
+                );
+              },
+              ),
         ),
         topTitles: AxisTitles(
             sideTitles: SideTitles(
