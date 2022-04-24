@@ -22,11 +22,16 @@ class ChartCard extends StatelessWidget {
 
     final List<String> dropDownItems = ["Petrol", "Diesel", "Kerosene", "LPG"];
     return Padding(
-      padding: EdgeInsets.only(top: size.height * 0.02),
+      padding: EdgeInsets.all(size.height * 0.02),
       child: Container(
         height: size.height * 0.5,
         width: size.width,
-        color: const Color(0xff403b58),
+        decoration: BoxDecoration(
+           color: const Color(0xff403b58),
+           borderRadius: BorderRadius.circular(16.0)
+
+        ),
+       
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -46,8 +51,9 @@ Widget linechart(BuildContext context, List<ChartData> chartData) {
         right: size.width * 0.04,
         top: size.height * 0.02,
         left: size.width * 0.04),
-    child: AspectRatio(
-      aspectRatio: 1.1,
+    child: SizedBox(
+      height: size.height * 0.4,
+      width: size.width * 0.85,
       child: LineChart(
         LineChartData(
           minY: 90,
@@ -89,9 +95,9 @@ Widget dropDownItem(String dropDownValue, List<String> dropDownItems) {
   return Padding(
     padding: const EdgeInsets.only(left: 12.0),
     child: DropdownButton(
-      iconEnabledColor: Colors.white,
-      style:const TextStyle(color: Colors.white),
-        dropdownColor:const Color.fromARGB(255, 47, 46, 65),
+        iconEnabledColor: Colors.white,
+        style: const TextStyle(color: Colors.white),
+        dropdownColor: const Color.fromARGB(255, 47, 46, 65),
         borderRadius: BorderRadius.circular(12.0),
         elevation: 10,
         value: dropDownValue,
@@ -113,32 +119,31 @@ class LineTitles {
             showTitles: true,
             reservedSize: 30.0,
             getTitlesWidget: (value, meta) {
-                return Padding(
-                  padding: const EdgeInsets.only(right:6.0),
-                  child: Text(value.toString(),
-                  style:const TextStyle(
-                    color: Colors.white
-                  ),),
-                );
-              },
+              return Padding(
+                padding: const EdgeInsets.only(right: 6.0),
+                child: Text(
+                  value.toString(),
+                  style: const TextStyle(color: Colors.white),
+                ),
+              );
+            },
             interval: 1,
           ),
         ),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
-              showTitles: true,
-              reservedSize: 50.0,
-              getTitlesWidget: (value, meta) {
-                
-                return Padding(
-                  padding: const EdgeInsets.only(right:6.0),
-                  child: Text(value.toString(),
-                  style:const TextStyle(
-                    color: Colors.white
-                  ),),
-                );
-              },
-              ),
+            showTitles: true,
+            reservedSize: 50.0,
+            getTitlesWidget: (value, meta) {
+              return Padding(
+                padding: const EdgeInsets.only(right: 6.0),
+                child: Text(
+                  value.toString(),
+                  style: const TextStyle(color: Colors.white),
+                ),
+              );
+            },
+          ),
         ),
         topTitles: AxisTitles(
             sideTitles: SideTitles(

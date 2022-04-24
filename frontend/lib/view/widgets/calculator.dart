@@ -16,7 +16,8 @@ class MyCalculator extends StatelessWidget {
           height: size.height * 0.1,
           width: size.width * 0.9,
           decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 47, 46, 65), borderRadius: BorderRadius.circular(12.0)),
+              color: const Color.fromARGB(255, 47, 46, 65),
+              borderRadius: BorderRadius.circular(12.0)),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,

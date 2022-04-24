@@ -9,16 +9,17 @@ class HomePage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            "Fuel Prices",
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge!
-                .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          backgroundColor:const Color.fromARGB(255, 47, 46, 65),
-          leading: Builder(builder: (BuildContext context) {
+        centerTitle: true,
+        title: Text(
+          "Fuel Prices",
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: const Color.fromARGB(255, 47, 46, 65),
+        leading: Builder(
+          builder: (BuildContext context) {
             return IconButton(
               onPressed: () {
                 Scaffold.of(context).openDrawer();
@@ -28,7 +29,9 @@ class HomePage extends StatelessWidget {
                 size: 35,
               ),
             );
-          })),
+          },
+        ),
+      ),
       body: SizedBox(
         height: size.height,
         width: size.width,
