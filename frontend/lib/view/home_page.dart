@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
                 .titleLarge!
                 .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          backgroundColor: Colors.red,
+          backgroundColor:const Color.fromARGB(255, 47, 46, 65),
           leading: Builder(builder: (BuildContext context) {
             return IconButton(
               onPressed: () {
