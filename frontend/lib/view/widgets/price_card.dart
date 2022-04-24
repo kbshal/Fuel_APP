@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import 'package:fuel_prices/model/data.dart';
 
 class PriceCard extends StatelessWidget {

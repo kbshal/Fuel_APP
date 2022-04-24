@@ -23,7 +23,6 @@ class HomeCard extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-      
         children: [
           const ChartCard(),
           PriceCard(
@@ -33,8 +32,7 @@ class HomeCard extends StatelessWidget {
             lpgPrice: lpgPrice,
             kerosenePrice: kerosenePrice,
           ),
-         const MyCalculator()
-    
+          const MyCalculator()
         ],
       ),
     );
