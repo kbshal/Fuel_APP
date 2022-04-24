@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 import 'package:fuel_prices/model/data.dart';
 
@@ -66,12 +65,7 @@ class FuelPricesCard extends StatelessWidget {
     return Container(
       width: size.width * 0.4,
       decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [Colors.pink, Colors.deepPurpleAccent],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            transform: GradientRotation(0.1),
-          ),
+          color: const Color.fromARGB(255, 47, 46, 65),
           borderRadius: BorderRadius.circular(8.0)),
       child: Column(
         children: [
