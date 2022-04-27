@@ -27,11 +27,8 @@ class ChartCard extends StatelessWidget {
         height: size.height * 0.5,
         width: size.width,
         decoration: BoxDecoration(
-           color: const Color(0xff403b58),
-           borderRadius: BorderRadius.circular(16.0)
-
-        ),
-       
+            color: const Color(0xff403b58),
+            borderRadius: BorderRadius.circular(16.0)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -107,7 +104,9 @@ Widget dropDownItem(String dropDownValue, List<String> dropDownItems) {
             value: value,
           );
         }).toList(),
-        onChanged: (value) => {print(value)}),
+        onChanged: (value) => {
+          
+        }),
   );
 }
 

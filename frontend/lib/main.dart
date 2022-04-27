@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fuel_prices/view/home_page.dart';
+import 'package:fuel_prices/view/Pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());

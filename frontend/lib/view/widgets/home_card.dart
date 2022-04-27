@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fuel_prices/view/widgets/calculator.dart';
+import 'package:fuel_prices/view/widgets/Calculator/calculator.dart';
 import 'package:fuel_prices/view/widgets/Chart/chart_card.dart';
 import 'package:fuel_prices/view/widgets/price_card.dart';
 
