@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fuel_prices/view/Pages/calculator_page.dart';
 
 class MyCalculator extends StatelessWidget {
   const MyCalculator({Key? key}) : super(key: key);
@@ -11,7 +12,10 @@ class MyCalculator extends StatelessWidget {
           EdgeInsets.only(top: size.height * 0.04, bottom: size.height * 0.04),
       child: InkWell(
         borderRadius: BorderRadius.circular(12.0),
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const CalculatorPage()));
+        },
         child: Ink(
           height: size.height * 0.1,
           width: size.width * 0.9,
