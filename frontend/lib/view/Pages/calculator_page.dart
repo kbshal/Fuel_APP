@@ -30,6 +30,7 @@ class CalculatorPage extends StatelessWidget {
   }
 }
 
+//Nepal Oil Corporation Widget
 Widget company(Size size, BuildContext context) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,6 +64,7 @@ Widget company(Size size, BuildContext context) {
   );
 }
 
+//Fuel choices
 Widget fuelDropDown(Size size, BuildContext context, List<String> list) {
   String defaultValue = list[0];
   return Column(
@@ -112,16 +114,21 @@ Widget fuelDropDown(Size size, BuildContext context, List<String> list) {
   );
 }
 
+//Conversion
 Widget textField(Size size, BuildContext context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [enterRupees(size, context),
-   Padding(
-     padding: EdgeInsets.only(top: size.height*0.05),
-     child: Icon(Icons.compare_arrows_sharp,
-     size: size.height*0.04,),
-   )
-    , quantityLitres(size, context)],
+    children: [
+      enterRupees(size, context),
+      Padding(
+        padding: EdgeInsets.only(top: size.height * 0.05),
+        child: Icon(
+          Icons.compare_arrows_sharp,
+          size: size.height * 0.04,
+        ),
+      ),
+      quantityLitres(size, context)
+    ],
   );
 }
 
@@ -148,14 +155,17 @@ Widget enterRupees(Size size, BuildContext context) {
           keyboardType: TextInputType.number,
           textAlignVertical: TextAlignVertical.center,
           decoration: const InputDecoration(
-              hintText: "0.0",
-              errorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red, width: 2.0)),
-              focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: Color.fromARGB(255, 0, 197, 10), width: 2.0)),
-              border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red, width: 5.0))),
+            contentPadding: EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
+            hintText: "0.0",
+            errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red, width: 2.0)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                    color: Color.fromARGB(255, 0, 197, 10), width: 2.0)),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.red, width: 5.0),
+            ),
+          ),
         ),
       )
     ],
@@ -183,16 +193,18 @@ Widget quantityLitres(Size size, BuildContext context) {
         height: size.height * 0.06,
         child: TextFormField(
           keyboardType: TextInputType.number,
-          textAlignVertical: TextAlignVertical.center,
           decoration: const InputDecoration(
-              hintText: "0.0",
-              errorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red, width: 2.0)),
-              focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: Color.fromARGB(255, 0, 197, 10), width: 2.0)),
-              border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red, width: 5.0))),
+            contentPadding: EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
+            hintText: "0.0",
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.red, width: 5.0),
+            ),
+            errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red, width: 2.0)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                    color: Color.fromARGB(255, 0, 197, 10), width: 2.0)),
+          ),
         ),
       )
     ],
