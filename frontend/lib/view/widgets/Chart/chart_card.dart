@@ -54,6 +54,7 @@ Widget linechart(BuildContext context, List<ChartData> chartData) {
       child: LineChart(
         LineChartData(
           minY: 90,
+          maxY: 250,
           titlesData: LineTitles.getTitleData(),
           borderData: FlBorderData(
               show: true, border: Border.all(color: Colors.teal, width: 3)),
@@ -104,9 +105,7 @@ Widget dropDownItem(String dropDownValue, List<String> dropDownItems) {
             value: value,
           );
         }).toList(),
-        onChanged: (value) => {
-          
-        }),
+        onChanged: (value) => {}),
   );
 }
 
