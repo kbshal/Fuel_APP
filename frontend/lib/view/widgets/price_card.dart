@@ -62,12 +62,12 @@ class FuelPricesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-      width: size.width * 0.4,
+    return  fuelName=="LPG Gas"? Container(
       decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 47, 46, 65),
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(8.0)),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
             icon,
@@ -79,14 +79,42 @@ class FuelPricesCard extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .titleLarge!
-                .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                .copyWith(color: Theme.of(context).primaryColor),
           ),
           Text(
-            "Nrs. ${fuelPrice.toString()}",
+            "Nrs. ${fuelPrice.toString()}/Cyl",
             style: Theme.of(context)
                 .textTheme
                 .titleMedium!
-                .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                .copyWith(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
+          )
+        ],
+      ),
+    ):Container(
+      decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: BorderRadius.circular(8.0)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            icon,
+            width: size.width * 0.4,
+            height: size.height * 0.1,
+          ),
+          Text(
+            fuelName,
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge!
+                .copyWith(color: Theme.of(context).primaryColor),
+          ),
+          Text(
+            "Nrs. ${fuelPrice.toString()}/ltr",
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
           )
         ],
       ),

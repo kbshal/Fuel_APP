@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fuel_prices/view/Pages/calculator_page.dart';
+import 'package:fuel_prices/view/Pages/contributor_page.dart';
+import 'package:fuel_prices/view/Pages/settings_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/home_card.dart';
 
@@ -19,7 +22,7 @@ class HomePage extends StatelessWidget {
               .titleLarge!
               .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: const Color.fromARGB(255, 47, 46, 65),
+        // backgroundColor: const Color.fromARGB(255, 47, 46, 65),
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
@@ -34,9 +37,12 @@ class HomePage extends StatelessWidget {
           },
         ),
       ),
-      body: SizedBox(
+      body: Container(
         height: size.height,
         width: size.width,
+        decoration: BoxDecoration(
+          color: Theme.of(context).canvasColor
+        ),
         child: const HomeCard(
             cityName: "Kathmandu",
             petrolPrice: 160,
@@ -93,10 +99,28 @@ class DrawerPage extends StatelessWidget {
                 ],
               ),
             ),
-            drawerItem(size, context, Icons.home, "Home"),
-            drawerItem(size, context, Icons.calculate, "Calculator"),
-            drawerItem(size, context, Icons.code, "Contributor"),
-            drawerItem(size, context, Icons.settings, "Settings"),
+            drawerItem(size, context, Icons.home, "Home", const HomePage()),
+            drawerItem(
+              size,
+              context,
+              Icons.calculate,
+              "Calculator",
+              const CalculatorPage(),
+            ),
+            drawerItem(
+              size,
+              context,
+              Icons.code,
+              "Contributor",
+              const ContributorPage(),
+            ),
+            drawerItem(
+              size,
+              context,
+              Icons.settings,
+              "Settings",
+              const SettingsPage(),
+            ),
             versionApp(context, size)
           ],
         ),
@@ -105,12 +129,16 @@ class DrawerPage extends StatelessWidget {
   }
 }
 
-Widget drawerItem(
-    Size size, BuildContext context, IconData iconData, String text) {
+Widget drawerItem(Size size, BuildContext context, IconData iconData,
+    String text, Widget page) {
   return Padding(
     padding: EdgeInsets.only(top: size.height * 0.03),
     child: InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pop(context);
+        Navigator.push(
+            context, MaterialPageRoute(builder: ((context) => page)));
+      },
       child: ListTile(
         leading: Icon(
           iconData,
@@ -130,7 +158,7 @@ Widget drawerItem(
 
 Widget versionApp(BuildContext context, Size size) {
   return Padding(
-    padding: EdgeInsets.only(top: size.height * 0.3),
+    padding: EdgeInsets.only(top: size.height * 0.25),
     child: SizedBox(
       child: Center(
         child: Text(
