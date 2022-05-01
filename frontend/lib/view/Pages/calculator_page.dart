@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fuel_prices/view_model/calculator/calculator_bloc.dart';
+import 'package:fuel_prices/view_model/converter/string_to_int.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CalculatorPage extends StatelessWidget {
   const CalculatorPage({Key? key}) : super(key: key);
@@ -26,12 +29,15 @@ class CalculatorPage extends StatelessWidget {
         ),
         // backgroundColor: const Color.fromARGB(255, 47, 46, 65),
       ),
-      body: Column(
-        children: [
-          company(size, context),
-          fuelDropDown(size, context, list),
-          textField(size, context)
-        ],
+      body: BlocProvider(
+        create: (context) => CalculatorBloc(stringConverter: StringConverter),
+        child: Column(
+          children: [
+            company(size, context),
+            fuelDropDown(size, context, list),
+            textField(size, context)
+          ],
+        ),
       ),
     );
   }
@@ -123,19 +129,55 @@ Widget fuelDropDown(Size size, BuildContext context, List<String> list) {
 
 //Conversion
 Widget textField(Size size, BuildContext context) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      enterRupees(size, context),
-      Padding(
-        padding: EdgeInsets.only(top: size.height * 0.05),
-        child: Icon(
-          Icons.compare_arrows_sharp,
-          size: size.height * 0.04,
-        ),
-      ),
-      quantityLitres(size, context)
-    ],
+  return BlocBuilder<CalculatorBloc, CalculatorState>(
+    builder: (context, state) {
+      if (state is CalculatorInitial) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            enterRupees(size, context),
+            Padding(
+              padding: EdgeInsets.only(top: size.height * 0.05),
+              child: Icon(
+                Icons.compare_arrows_sharp,
+                size: size.height * 0.04,
+              ),
+            ),
+            quantityLitres(size, context, "0")
+          ],
+        );
+      } else if (state is CalculatorStateChange) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            enterRupees(size, context),
+            Padding(
+              padding: EdgeInsets.only(top: size.height * 0.05),
+              child: Icon(
+                Icons.compare_arrows_sharp,
+                size: size.height * 0.04,
+              ),
+            ),
+            quantityLitres(size, context, state.value)
+          ],
+        );
+      } else {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            enterRupees(size, context),
+            Padding(
+              padding: EdgeInsets.only(top: size.height * 0.05),
+              child: Icon(
+                Icons.compare_arrows_sharp,
+                size: size.height * 0.04,
+              ),
+            ),
+            quantityLitres(size, context, "0")
+          ],
+        );
+      }
+    },
   );
 }
 
@@ -159,9 +201,16 @@ Widget enterRupees(Size size, BuildContext context) {
         width: size.width * 0.25,
         height: size.height * 0.06,
         child: TextFormField(
+          maxLength: 7,
+          initialValue: "0",
           keyboardType: TextInputType.number,
           textAlignVertical: TextAlignVertical.center,
+          onChanged: (value) {
+            BlocProvider.of<CalculatorBloc>(context)
+                .add(PriceChange(value: value));
+          },
           decoration: const InputDecoration(
+            counterText: "",
             contentPadding: EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
             hintText: "0.0",
             errorBorder: OutlineInputBorder(
@@ -179,7 +228,12 @@ Widget enterRupees(Size size, BuildContext context) {
   );
 }
 
-Widget quantityLitres(Size size, BuildContext context) {
+Widget quantityLitres(Size size, BuildContext context, String value) {
+  var txt = TextEditingController(text: value);
+  final updatedText =value;
+  txt.value = txt.value.copyWith(text: updatedText);
+  
+
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -199,6 +253,8 @@ Widget quantityLitres(Size size, BuildContext context) {
         width: size.width * 0.25,
         height: size.height * 0.06,
         child: TextFormField(
+          controller: txt,
+          
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(
             contentPadding: EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
