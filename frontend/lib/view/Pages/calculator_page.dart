@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CalculatorPage extends StatelessWidget {
@@ -6,10 +7,16 @@ class CalculatorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    List<String> list = ["Petrol", "Diesel", "Kerosene", "LPG"];
+    List<String> list = ["Petrol", "Diesel", "Kerosene"];
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        leading: InkWell(
+            borderRadius: BorderRadius.circular(50.0),
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Icon(CupertinoIcons.back)),
         title: Text(
           "Fuel Calculator",
           style: Theme.of(context)
@@ -17,7 +24,7 @@ class CalculatorPage extends StatelessWidget {
               .titleLarge!
               .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: const Color.fromARGB(255, 47, 46, 65),
+        // backgroundColor: const Color.fromARGB(255, 47, 46, 65),
       ),
       body: Column(
         children: [

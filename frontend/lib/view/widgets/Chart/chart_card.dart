@@ -32,7 +32,7 @@ class ChartCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            dropDownItem(dropDownValue, dropDownItems),
+            dropDownItem(dropDownValue, dropDownItems,context),
             linechart(context, chartData)
           ],
         ),
@@ -89,13 +89,13 @@ Widget linechart(BuildContext context, List<ChartData> chartData) {
   );
 }
 
-Widget dropDownItem(String dropDownValue, List<String> dropDownItems) {
+Widget dropDownItem(String dropDownValue, List<String> dropDownItems,BuildContext context) {
   return Padding(
     padding: const EdgeInsets.only(left: 12.0),
     child: DropdownButton(
         iconEnabledColor: Colors.white,
         style: const TextStyle(color: Colors.white),
-        dropdownColor: const Color.fromARGB(255, 47, 46, 65),
+        dropdownColor: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(12.0),
         elevation: 10,
         value: dropDownValue,
