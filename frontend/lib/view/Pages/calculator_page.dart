@@ -135,7 +135,7 @@ Widget textField(Size size, BuildContext context) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            enterRupees(size, context),
+            enterRupees(size, context, false, "0"),
             Padding(
               padding: EdgeInsets.only(top: size.height * 0.05),
               child: Icon(
@@ -150,7 +150,7 @@ Widget textField(Size size, BuildContext context) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            enterRupees(size, context),
+            enterRupees(size, context, true),
             Padding(
               padding: EdgeInsets.only(top: size.height * 0.05),
               child: Icon(
@@ -161,11 +161,26 @@ Widget textField(Size size, BuildContext context) {
             quantityLitres(size, context, state.value)
           ],
         );
+      } else if (state is QuantityState) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            enterRupees(size, context, false, state.value),
+            Padding(
+              padding: EdgeInsets.only(top: size.height * 0.05),
+              child: Icon(
+                Icons.compare_arrows_sharp,
+                size: size.height * 0.04,
+              ),
+            ),
+            quantityLitres(size, context)
+          ],
+        );
       } else {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            enterRupees(size, context),
+            enterRupees(size, context, false, "0"),
             Padding(
               padding: EdgeInsets.only(top: size.height * 0.05),
               child: Icon(
@@ -181,7 +196,11 @@ Widget textField(Size size, BuildContext context) {
   );
 }
 
-Widget enterRupees(Size size, BuildContext context) {
+Widget enterRupees(Size size, BuildContext context, bool isFoucesd,
+    [String? value]) {
+  var txt = TextEditingController(text: value);
+  final updatedText = value;
+  txt.value = txt.value.copyWith(text: updatedText);
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -200,39 +219,64 @@ Widget enterRupees(Size size, BuildContext context) {
             EdgeInsets.only(left: size.width * 0.06, top: size.height * 0.01),
         width: size.width * 0.25,
         height: size.height * 0.06,
-        child: TextFormField(
-          maxLength: 7,
-          initialValue: "0",
-          keyboardType: TextInputType.number,
-          textAlignVertical: TextAlignVertical.center,
-          onChanged: (value) {
-            BlocProvider.of<CalculatorBloc>(context)
-                .add(PriceChange(value: value));
-          },
-          decoration: const InputDecoration(
-            counterText: "",
-            contentPadding: EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
-            hintText: "0.0",
-            errorBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.red, width: 2.0)),
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: Color.fromARGB(255, 0, 197, 10), width: 2.0)),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red, width: 5.0),
-            ),
-          ),
-        ),
+        child: isFoucesd
+            ? TextFormField(
+                maxLength: 7,
+                keyboardType: TextInputType.number,
+                textAlignVertical: TextAlignVertical.center,
+                onChanged: (value) {
+                  BlocProvider.of<CalculatorBloc>(context)
+                      .add(PriceChange(value: value));
+                },
+                decoration: const InputDecoration(
+                  counterText: "",
+                  contentPadding:
+                      EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
+                  hintText: "0.0",
+                  errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red, width: 2.0)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Color.fromARGB(255, 0, 197, 10), width: 2.0)),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red, width: 5.0),
+                  ),
+                ),
+              )
+            : TextFormField(
+                controller: txt,
+                maxLength: 7,
+                keyboardType: TextInputType.number,
+                textAlignVertical: TextAlignVertical.center,
+                onChanged: (value) {
+                  BlocProvider.of<CalculatorBloc>(context)
+                      .add(PriceChange(value: value));
+                },
+                decoration: const InputDecoration(
+                  counterText: "",
+                  contentPadding:
+                      EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
+                  hintText: "0.0",
+                  errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red, width: 2.0)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Color.fromARGB(255, 0, 197, 10), width: 2.0)),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red, width: 5.0),
+                  ),
+                ),
+              ),
       )
     ],
   );
 }
 
-Widget quantityLitres(Size size, BuildContext context, String value) {
+Widget quantityLitres(Size size, BuildContext context, [String? value]) {
   var txt = TextEditingController(text: value);
-  final updatedText =value;
+  final updatedText = value;
   txt.value = txt.value.copyWith(text: updatedText);
-  
+  print(txt.value.text);
 
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -253,8 +297,11 @@ Widget quantityLitres(Size size, BuildContext context, String value) {
         width: size.width * 0.25,
         height: size.height * 0.06,
         child: TextFormField(
-          controller: txt,
-          
+          // controller: txt,
+          onChanged: (val) {
+            BlocProvider.of<CalculatorBloc>(context)
+                .add(QuantityChange(value: val));
+          },
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(
             contentPadding: EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),

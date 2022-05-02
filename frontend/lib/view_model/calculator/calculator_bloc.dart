@@ -7,25 +7,37 @@ part 'calculator_state.dart';
 
 class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
   StringConverter? stringConverter;
-  CalculatorBloc({required stringConverter})
-      : super(CalculatorInitial()) {
+  CalculatorBloc({required stringConverter}) : super(CalculatorInitial()) {
     on<PriceChange>(onPriceChange);
+    on<QuantityChange>(onQuantityChange);
   }
   Future<void>? onPriceChange(
-        PriceChange event, Emitter<CalculatorState> emit) async {
-      if(event.value==""){
-      stringConverter = StringConverter(value:"0");
+      PriceChange event, Emitter<CalculatorState> emit) async {
+    if (event.value == "") {
+      stringConverter = StringConverter(value: "0");
       int value = stringConverter!.convert();
       double quantity = value / 160;
       emit(CalculatorStateChange(value: quantity.toString()));
-
-      }else{
+    } else {
       stringConverter = StringConverter(value: event.value);
       int value = stringConverter!.convert();
       double quantity = value / 160;
       emit(CalculatorStateChange(value: quantity.toString()));
-
-      }
-      
     }
+  }
+
+  Future<void>? onQuantityChange(
+      QuantityChange event, Emitter<CalculatorState> emit) async {
+    if (event.value == "") {
+      stringConverter = StringConverter(value: "0");
+      int value = stringConverter!.convert();
+      double quantity = value * 160;
+      emit(QuantityState(value: quantity.toString()));
+    } else {
+      // stringConverter = StringConverter(value: event.value);
+      int value = int.parse(event.value);
+      double quantity = value * 160;
+      emit(QuantityState(value: quantity.toString()));
+    }
+  }
 }
