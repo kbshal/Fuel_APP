@@ -5,6 +5,8 @@ abstract class CalculatorState extends Equatable {
 
   @override
   List<Object> get props => [];
+
+ 
 }
 
 class CalculatorInitial extends CalculatorState {
@@ -15,4 +17,12 @@ class CalculatorStateChange extends CalculatorState {
   const CalculatorStateChange({required this.value});
   @override
   List<Object> get props=>[value];
+}
+
+class QuantityState extends CalculatorState{
+  final String value;
+  const QuantityState({required this.value});
+  @override
+  List<Object> get props=>[value];
+
 }
