@@ -15,12 +15,12 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
       PriceChange event, Emitter<CalculatorState> emit) async {
     if (event.value == "") {
       stringConverter = StringConverter(value: "0");
-      int value = stringConverter!.convert();
+      double value = stringConverter!.convert();
       double quantity = value / 160;
       emit(CalculatorStateChange(value: quantity.toString()));
     } else {
       stringConverter = StringConverter(value: event.value);
-      int value = stringConverter!.convert();
+      double value = stringConverter!.convert();
       double quantity = value / 160;
       emit(CalculatorStateChange(value: quantity.toString()));
     }
@@ -30,12 +30,12 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
       QuantityChange event, Emitter<CalculatorState> emit) async {
     if (event.value == "") {
       stringConverter = StringConverter(value: "0");
-      int value = stringConverter!.convert();
+      double value = stringConverter!.convert();
       double quantity = value * 160;
       emit(QuantityState(value: quantity.toString()));
     } else {
-      // stringConverter = StringConverter(value: event.value);
-      int value = int.parse(event.value);
+      stringConverter = StringConverter(value: event.value);
+      double value = stringConverter!.convert();
       double quantity = value * 160;
       emit(QuantityState(value: quantity.toString()));
     }

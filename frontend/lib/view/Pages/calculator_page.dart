@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fuel_prices/view_model/calculator/calculator_bloc.dart';
 import 'package:fuel_prices/view_model/converter/string_to_int.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -143,7 +144,7 @@ Widget textField(Size size, BuildContext context) {
                 size: size.height * 0.04,
               ),
             ),
-            quantityLitres(size, context, "0")
+            quantityLitres(size, context, false,"0")
           ],
         );
       } else if (state is CalculatorStateChange) {
@@ -158,7 +159,7 @@ Widget textField(Size size, BuildContext context) {
                 size: size.height * 0.04,
               ),
             ),
-            quantityLitres(size, context, state.value)
+            quantityLitres(size, context, false,state.value)
           ],
         );
       } else if (state is QuantityState) {
@@ -173,7 +174,7 @@ Widget textField(Size size, BuildContext context) {
                 size: size.height * 0.04,
               ),
             ),
-            quantityLitres(size, context)
+            quantityLitres(size, context,true)
           ],
         );
       } else {
@@ -188,7 +189,7 @@ Widget textField(Size size, BuildContext context) {
                 size: size.height * 0.04,
               ),
             ),
-            quantityLitres(size, context, "0")
+            quantityLitres(size, context, false,"0")
           ],
         );
       }
@@ -221,6 +222,10 @@ Widget enterRupees(Size size, BuildContext context, bool isFoucesd,
         height: size.height * 0.06,
         child: isFoucesd
             ? TextFormField(
+                inputFormatters: [
+                  //regular expression to allow only one decimal point
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))
+                ],
                 maxLength: 7,
                 keyboardType: TextInputType.number,
                 textAlignVertical: TextAlignVertical.center,
@@ -272,13 +277,13 @@ Widget enterRupees(Size size, BuildContext context, bool isFoucesd,
   );
 }
 
-Widget quantityLitres(Size size, BuildContext context, [String? value]) {
+Widget quantityLitres(Size size, BuildContext context, bool isFouced,[String? value]) {
   var txt = TextEditingController(text: value);
   final updatedText = value;
   txt.value = txt.value.copyWith(text: updatedText);
-  print(txt.value.text);
+  
 
-  return Column(
+  return isFouced?Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Container(
@@ -297,7 +302,49 @@ Widget quantityLitres(Size size, BuildContext context, [String? value]) {
         width: size.width * 0.25,
         height: size.height * 0.06,
         child: TextFormField(
-          // controller: txt,
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))
+          ],
+          onChanged: (val) {
+            BlocProvider.of<CalculatorBloc>(context)
+                .add(QuantityChange(value: val));
+          },
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(
+            contentPadding: EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
+            hintText: "0.0",
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.red, width: 5.0),
+            ),
+            errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red, width: 2.0)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                    color: Color.fromARGB(255, 0, 197, 10), width: 2.0)),
+          ),
+        ),
+      )
+    ],
+  ):Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Container(
+        margin:
+            EdgeInsets.only(top: size.height * 0.02, right: size.width * 0.06),
+        child: Text(
+          "Quantity(litres)",
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: const Color.fromARGB(255, 0, 197, 10),
+              fontWeight: FontWeight.bold),
+        ),
+      ),
+      Container(
+        margin:
+            EdgeInsets.only(right: size.width * 0.06, top: size.height * 0.01),
+        width: size.width * 0.25,
+        height: size.height * 0.06,
+        child: TextFormField(
+          controller: txt,
           onChanged: (val) {
             BlocProvider.of<CalculatorBloc>(context)
                 .add(QuantityChange(value: val));
