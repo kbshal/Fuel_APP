@@ -161,7 +161,7 @@ Widget versionApp(BuildContext context, Size size) {
         child: Text(
           "v.1.0.0",
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
-              color: Colors.white,
+              color:Theme.of(context).textTheme.titleLarge!.color,
               fontFamily: GoogleFonts.aBeeZee().fontFamily),
         ),
       ),
