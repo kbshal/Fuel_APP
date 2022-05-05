@@ -136,7 +136,7 @@ Widget textField(Size size, BuildContext context) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            enterRupees(size, context, false, "0"),
+            enterRupees(size, context, true, "0"),
             Padding(
               padding: EdgeInsets.only(top: size.height * 0.05),
               child: Icon(
@@ -144,7 +144,7 @@ Widget textField(Size size, BuildContext context) {
                 size: size.height * 0.04,
               ),
             ),
-            quantityLitres(size, context, false,"0")
+            quantityLitres(size, context, true,"0")
           ],
         );
       } else if (state is CalculatorStateChange) {
@@ -181,12 +181,13 @@ Widget textField(Size size, BuildContext context) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            enterRupees(size, context, false, "0"),
+            enterRupees(size, context, true, "0"),
             Padding(
               padding: EdgeInsets.only(top: size.height * 0.05),
               child: Icon(
                 Icons.compare_arrows_sharp,
                 size: size.height * 0.04,
+                color: Theme.of(context).primaryColor,
               ),
             ),
             quantityLitres(size, context, false,"0")
@@ -222,53 +223,56 @@ Widget enterRupees(Size size, BuildContext context, bool isFoucesd,
         height: size.height * 0.06,
         child: isFoucesd
             ? TextFormField(
+              style: Theme.of(context).textTheme.bodyLarge,
                 inputFormatters: [
                   //regular expression to allow only one decimal point
                   FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))
                 ],
-                maxLength: 7,
                 keyboardType: TextInputType.number,
                 textAlignVertical: TextAlignVertical.center,
                 onChanged: (value) {
                   BlocProvider.of<CalculatorBloc>(context)
                       .add(PriceChange(value: value));
                 },
-                decoration: const InputDecoration(
+                decoration:  InputDecoration(
                   counterText: "",
                   contentPadding:
-                      EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
+                     const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
                   hintText: "0.0",
-                  errorBorder: OutlineInputBorder(
+                  hintStyle: Theme.of(context).textTheme.bodyLarge,
+                  errorBorder:const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.red, width: 2.0)),
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder:const OutlineInputBorder(
                       borderSide: BorderSide(
                           color: Color.fromARGB(255, 0, 197, 10), width: 2.0)),
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.red, width: 5.0),
                   ),
                 ),
               )
             : TextFormField(
                 controller: txt,
-                maxLength: 7,
+                style: Theme.of(context).textTheme.bodyLarge,
                 keyboardType: TextInputType.number,
                 textAlignVertical: TextAlignVertical.center,
                 onChanged: (value) {
                   BlocProvider.of<CalculatorBloc>(context)
                       .add(PriceChange(value: value));
                 },
-                decoration: const InputDecoration(
+                decoration:  InputDecoration(
+                  
                   counterText: "",
                   contentPadding:
-                      EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
+                     const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
                   hintText: "0.0",
-                  errorBorder: OutlineInputBorder(
+                  errorBorder:const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.red, width: 2.0)),
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                          color: Color.fromARGB(255, 0, 197, 10), width: 2.0)),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 5.0),
+                          color: Theme.of(context).cardColor)
+                          ,),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color:Theme.of(context).primaryColorLight, width: 2.0),
                   ),
                 ),
               ),

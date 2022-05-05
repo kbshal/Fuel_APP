@@ -62,68 +62,65 @@ class DrawerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Drawer(
-      semanticLabel: "1.1",
-      backgroundColor: const Color.fromARGB(255, 47, 46, 65),
-      child: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              // margin: EdgeInsets.only(top: size.height*0.2),
-              width: size.width,
-              color: const Color.fromARGB(255, 0, 219, 117),
-              height: size.height * 0.18,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: size.width * 0.01, bottom: size.width * 0.04),
-                    child: Image.asset(
-                      "assets/station.png",
-                      height: size.height * 0.06,
-                      width: size.width * 0.2,
-                      color: Colors.white,
-                    ),
+      backgroundColor: Theme.of(context).canvasColor,
+      child: Column(
+        children: [
+          Container(
+            // margin: EdgeInsets.only(top: size.height*0.2),
+            width: size.width,
+            color: Theme.of(context).appBarTheme.backgroundColor,
+            height: size.height * 0.18,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: size.width * 0.01, bottom: size.width * 0.04),
+                  child: Image.asset(
+                    "assets/station.png",
+                    height: size.height * 0.06,
+                    width: size.width * 0.2,
+                    color: Colors.white,
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: size.width * 0.01, bottom: size.width * 0.04),
-                    child: Text(
-                      "Nepal Fuel App",
-                      style: TextStyle(
-                          fontSize: size.height * 0.03,
-                          color: Colors.white,
-                          fontFamily: GoogleFonts.aBeeZee().fontFamily),
-                    ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: size.width * 0.01, bottom: size.width * 0.04),
+                  child: Text(
+                    "Nepal Fuel App",
+                    style: TextStyle(
+                        fontSize: size.height * 0.03,
+                        color: Colors.white,
+                        fontFamily: GoogleFonts.aBeeZee().fontFamily),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            drawerItem(size, context, Icons.home, "Home", const HomePage()),
-            drawerItem(
-              size,
-              context,
-              Icons.calculate,
-              "Calculator",
-              const CalculatorPage(),
-            ),
-            drawerItem(
-              size,
-              context,
-              Icons.code,
-              "Contributor",
-              const ContributorPage(),
-            ),
-            drawerItem(
-              size,
-              context,
-              Icons.settings,
-              "Settings",
-              const SettingsPage(),
-            ),
-            versionApp(context, size)
-          ],
-        ),
+          ),
+          drawerItem(size, context, Icons.home, "Home", const HomePage()),
+          drawerItem(
+            size,
+            context,
+            Icons.calculate,
+            "Calculator",
+            const CalculatorPage(),
+          ),
+          drawerItem(
+            size,
+            context,
+            Icons.code,
+            "Contributor",
+            const ContributorPage(),
+          ),
+          drawerItem(
+            size,
+            context,
+            Icons.settings,
+            "Settings",
+            const SettingsPage(),
+          ),
+          versionApp(context, size)
+        ],
       ),
     );
   }
@@ -143,12 +140,12 @@ Widget drawerItem(Size size, BuildContext context, IconData iconData,
         leading: Icon(
           iconData,
           size: size.height * 0.04,
-          color: Colors.white,
+          color: Theme.of(context).textTheme.titleLarge!.color,
         ),
         title: Text(
           text,
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
-              color: Colors.white,
+              color:Theme.of(context).textTheme.titleLarge!.color,
               fontFamily: GoogleFonts.aBeeZee().fontFamily),
         ),
       ),
@@ -164,7 +161,7 @@ Widget versionApp(BuildContext context, Size size) {
         child: Text(
           "v.1.0.0",
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
-              color: Colors.white,
+              color:Theme.of(context).textTheme.titleLarge!.color,
               fontFamily: GoogleFonts.aBeeZee().fontFamily),
         ),
       ),
