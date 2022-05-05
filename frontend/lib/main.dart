@@ -12,12 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppTheme appTheme=AppTheme();
-    return  MaterialApp(
+    AppTheme appTheme = AppTheme();
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const SettingsPage(),
+      home: const HomePage(),
       themeMode: ThemeMode.dark,
-      theme:appTheme.lightTheme() ,
+      theme: appTheme.lightTheme(),
       darkTheme: appTheme.darkTheme(),
     );
   }
