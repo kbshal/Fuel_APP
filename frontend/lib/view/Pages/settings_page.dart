@@ -141,6 +141,8 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 }
 
+
+//Contact US Widget
 Widget contactUS(Size size, BuildContext context) {
   return Container(
     margin: EdgeInsets.only(top: size.height * 0.03),
@@ -181,6 +183,9 @@ Widget contactUS(Size size, BuildContext context) {
   );
 }
 
+
+
+//About Us Widget
 Widget aboutUS(Size size, BuildContext context) {
   return Container(
     margin: EdgeInsets.only(top: size.height * 0.03),
@@ -221,6 +226,8 @@ Widget aboutUS(Size size, BuildContext context) {
   );
 }
 
+
+//Terms and Agreements Widget
 Widget moreApps(Size size, BuildContext context) {
   return Container(
     margin: EdgeInsets.only(top: size.height * 0.03),
