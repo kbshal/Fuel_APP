@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fuel_prices/view/utils/colors.dart';
+
 
 class AppTheme {
   lightTheme() {
