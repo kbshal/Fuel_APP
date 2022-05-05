@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fuel_prices/view/Pages/home_page.dart';
-import 'package:fuel_prices/view/Pages/settings_page.dart';
 import 'package:fuel_prices/view/utils/app_theme.dart';
 
 void main() {
@@ -12,12 +11,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppTheme appTheme=AppTheme();
-    return  MaterialApp(
+    AppTheme appTheme = AppTheme();
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const SettingsPage(),
+      home: const HomePage(),
       themeMode: ThemeMode.dark,
-      theme:appTheme.lightTheme() ,
+      theme: appTheme.lightTheme(),
       darkTheme: appTheme.darkTheme(),
     );
   }

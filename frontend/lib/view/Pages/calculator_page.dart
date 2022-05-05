@@ -142,9 +142,10 @@ Widget textField(Size size, BuildContext context) {
               child: Icon(
                 Icons.compare_arrows_sharp,
                 size: size.height * 0.04,
+                color: Theme.of(context).primaryColorLight,
               ),
             ),
-            quantityLitres(size, context, true,"0")
+            quantityLitres(size, context, true, "0")
           ],
         );
       } else if (state is CalculatorStateChange) {
@@ -157,9 +158,10 @@ Widget textField(Size size, BuildContext context) {
               child: Icon(
                 Icons.compare_arrows_sharp,
                 size: size.height * 0.04,
+                color: Theme.of(context).primaryColorLight,
               ),
             ),
-            quantityLitres(size, context, false,state.value)
+            quantityLitres(size, context, false, state.value)
           ],
         );
       } else if (state is QuantityState) {
@@ -172,9 +174,10 @@ Widget textField(Size size, BuildContext context) {
               child: Icon(
                 Icons.compare_arrows_sharp,
                 size: size.height * 0.04,
+                color: Theme.of(context).primaryColorLight,
               ),
             ),
-            quantityLitres(size, context,true)
+            quantityLitres(size, context, true)
           ],
         );
       } else {
@@ -187,10 +190,10 @@ Widget textField(Size size, BuildContext context) {
               child: Icon(
                 Icons.compare_arrows_sharp,
                 size: size.height * 0.04,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).primaryColorLight,
               ),
             ),
-            quantityLitres(size, context, false,"0")
+            quantityLitres(size, context, false, "0")
           ],
         );
       }
@@ -223,7 +226,7 @@ Widget enterRupees(Size size, BuildContext context, bool isFoucesd,
         height: size.height * 0.06,
         child: isFoucesd
             ? TextFormField(
-              style: Theme.of(context).textTheme.bodyLarge,
+                style: Theme.of(context).textTheme.bodyLarge,
                 inputFormatters: [
                   //regular expression to allow only one decimal point
                   FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))
@@ -234,19 +237,20 @@ Widget enterRupees(Size size, BuildContext context, bool isFoucesd,
                   BlocProvider.of<CalculatorBloc>(context)
                       .add(PriceChange(value: value));
                 },
-                decoration:  InputDecoration(
+                decoration: InputDecoration(
                   counterText: "",
                   contentPadding:
-                     const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
+                      const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
                   hintText: "0.0",
                   hintStyle: Theme.of(context).textTheme.bodyLarge,
-                  errorBorder:const OutlineInputBorder(
+                  errorBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.red, width: 2.0)),
-                  focusedBorder:const OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
                           color: Color.fromARGB(255, 0, 197, 10), width: 2.0)),
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 5.0),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Theme.of(context).primaryColorLight, width: 2.0),
                   ),
                 ),
               )
@@ -259,20 +263,19 @@ Widget enterRupees(Size size, BuildContext context, bool isFoucesd,
                   BlocProvider.of<CalculatorBloc>(context)
                       .add(PriceChange(value: value));
                 },
-                decoration:  InputDecoration(
-                  
+                decoration: InputDecoration(
                   counterText: "",
                   contentPadding:
-                     const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
+                      const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
                   hintText: "0.0",
-                  errorBorder:const OutlineInputBorder(
+                  errorBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.red, width: 2.0)),
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Theme.of(context).cardColor)
-                          ,),
+                    borderSide: BorderSide(color: Theme.of(context).cardColor),
+                  ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color:Theme.of(context).primaryColorLight, width: 2.0),
+                    borderSide: BorderSide(
+                        color: Theme.of(context).primaryColorLight, width: 2.0),
                   ),
                 ),
               ),
@@ -281,93 +284,110 @@ Widget enterRupees(Size size, BuildContext context, bool isFoucesd,
   );
 }
 
-Widget quantityLitres(Size size, BuildContext context, bool isFouced,[String? value]) {
+Widget quantityLitres(Size size, BuildContext context, bool isFouced,
+    [String? value]) {
   var txt = TextEditingController(text: value);
   final updatedText = value;
   txt.value = txt.value.copyWith(text: updatedText);
-  
 
-  return isFouced?Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Container(
-        margin:
-            EdgeInsets.only(top: size.height * 0.02, right: size.width * 0.06),
-        child: Text(
-          "Quantity(litres)",
-          style: Theme.of(context).textTheme.titleLarge!.copyWith(
-              color: const Color.fromARGB(255, 0, 197, 10),
-              fontWeight: FontWeight.bold),
-        ),
-      ),
-      Container(
-        margin:
-            EdgeInsets.only(right: size.width * 0.06, top: size.height * 0.01),
-        width: size.width * 0.25,
-        height: size.height * 0.06,
-        child: TextFormField(
-          inputFormatters: [
-            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))
+  return isFouced
+      ? Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.only(
+                  top: size.height * 0.02, right: size.width * 0.06),
+              child: Text(
+                "Quantity(litres)",
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: const Color.fromARGB(255, 0, 197, 10),
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                  right: size.width * 0.06, top: size.height * 0.01),
+              width: size.width * 0.25,
+              height: size.height * 0.06,
+              child: TextFormField(
+                style: Theme.of(context).textTheme.bodyLarge,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))
+                ],
+                onChanged: (val) {
+                  BlocProvider.of<CalculatorBloc>(context)
+                      .add(QuantityChange(value: val));
+                },
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintStyle: Theme.of(context).textTheme.bodyLarge,
+                  contentPadding:
+                      const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
+                  hintText: "0.0",
+                  border: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red, width: 5.0),
+                  ),
+                  errorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red, width: 2.0)),
+                  focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Color.fromARGB(255, 0, 197, 10), width: 2.0)),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Theme.of(context).primaryColorLight,
+                          width: 2.0)),
+                ),
+              ),
+            )
           ],
-          onChanged: (val) {
-            BlocProvider.of<CalculatorBloc>(context)
-                .add(QuantityChange(value: val));
-          },
-          keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
-            contentPadding: EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
-            hintText: "0.0",
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red, width: 5.0),
+        )
+      : Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.only(
+                  top: size.height * 0.02, right: size.width * 0.06),
+              child: Text(
+                "Quantity(litres)",
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: const Color.fromARGB(255, 0, 197, 10),
+                    fontWeight: FontWeight.bold),
+              ),
             ),
-            errorBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.red, width: 2.0)),
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: Color.fromARGB(255, 0, 197, 10), width: 2.0)),
-          ),
-        ),
-      )
-    ],
-  ):Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Container(
-        margin:
-            EdgeInsets.only(top: size.height * 0.02, right: size.width * 0.06),
-        child: Text(
-          "Quantity(litres)",
-          style: Theme.of(context).textTheme.titleLarge!.copyWith(
-              color: const Color.fromARGB(255, 0, 197, 10),
-              fontWeight: FontWeight.bold),
-        ),
-      ),
-      Container(
-        margin:
-            EdgeInsets.only(right: size.width * 0.06, top: size.height * 0.01),
-        width: size.width * 0.25,
-        height: size.height * 0.06,
-        child: TextFormField(
-          controller: txt,
-          onChanged: (val) {
-            BlocProvider.of<CalculatorBloc>(context)
-                .add(QuantityChange(value: val));
-          },
-          keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
-            contentPadding: EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
-            hintText: "0.0",
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red, width: 5.0),
-            ),
-            errorBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.red, width: 2.0)),
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: Color.fromARGB(255, 0, 197, 10), width: 2.0)),
-          ),
-        ),
-      )
-    ],
-  );
+            Container(
+              margin: EdgeInsets.only(
+                  right: size.width * 0.06, top: size.height * 0.01),
+              width: size.width * 0.25,
+              height: size.height * 0.06,
+              child: TextFormField(
+                style: Theme.of(context).textTheme.bodyLarge,
+                controller: txt,
+                onChanged: (val) {
+                  BlocProvider.of<CalculatorBloc>(context)
+                      .add(QuantityChange(value: val));
+                },
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  contentPadding:
+                      const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
+                  hintText: "0.0",
+                  border: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red, width: 5.0),
+                  ),
+                  errorBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red, width: 2.0),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Theme.of(context).primaryColorLight,
+                          width: 2.0)),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color.fromARGB(255, 0, 197, 10), width: 2.0),
+                  ),
+                ),
+              ),
+            )
+          ],
+        );
 }

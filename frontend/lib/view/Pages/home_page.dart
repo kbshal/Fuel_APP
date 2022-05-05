@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:fuel_prices/view/Pages/calculator_page.dart';
 import 'package:fuel_prices/view/Pages/contributor_page.dart';
@@ -40,9 +40,7 @@ class HomePage extends StatelessWidget {
       body: Container(
         height: size.height,
         width: size.width,
-        decoration: BoxDecoration(
-          color: Theme.of(context).canvasColor
-        ),
+        decoration: BoxDecoration(color: Theme.of(context).canvasColor),
         child: const HomeCard(
             cityName: "Kathmandu",
             petrolPrice: 160,
@@ -145,7 +143,7 @@ Widget drawerItem(Size size, BuildContext context, IconData iconData,
         title: Text(
           text,
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
-              color:Theme.of(context).textTheme.titleLarge!.color,
+              color: Theme.of(context).textTheme.titleLarge!.color,
               fontFamily: GoogleFonts.aBeeZee().fontFamily),
         ),
       ),
@@ -161,7 +159,7 @@ Widget versionApp(BuildContext context, Size size) {
         child: Text(
           "v.1.0.0",
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
-              color:Theme.of(context).textTheme.titleLarge!.color,
+              color: Theme.of(context).textTheme.titleLarge!.color,
               fontFamily: GoogleFonts.aBeeZee().fontFamily),
         ),
       ),

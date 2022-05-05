@@ -15,8 +15,10 @@ class MyCalculator extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(12.0),
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const CalculatorPage()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const CalculatorPage()));
           },
           child: Ink(
             height: size.height * 0.1,
@@ -34,8 +36,10 @@ class MyCalculator extends StatelessWidget {
                   width: size.width * 0.2,
                 ),
                 Text("Calculate  Rates",
-                    style: Theme.of(context).textTheme.headline5!.copyWith(
-                        color: Theme.of(context).primaryColor))
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline5!
+                        .copyWith(color: Theme.of(context).primaryColor))
               ],
             ),
           ),
