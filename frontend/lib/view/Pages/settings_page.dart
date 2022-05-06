@@ -60,7 +60,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    
                     children: [
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,10 +90,13 @@ class _SettingsPageState extends State<SettingsPage> {
                               const Color.fromARGB(255, 55, 49, 49),
                         ),
                         child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                              width: size.width * 0.4,
+                             
+                              height: size.height*0.15*0.5,
+                              width: size.width *0.9* 0.4,
                               child: RadioListTile(
                                   activeColor:
                                       const Color.fromARGB(255, 103, 62, 0),
@@ -110,6 +113,8 @@ class _SettingsPageState extends State<SettingsPage> {
                                   }),
                             ),
                             SizedBox(
+                              
+                              height: size.height*0.15*0.5,
                               width: size.width * 0.4,
                               child: RadioListTile(
                                   activeColor:
