@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:fuel_prices/view_model/calculator/calculator_bloc.dart';
 import 'package:fuel_prices/view_model/converter/string_to_int.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:math' as math;
 
 class CalculatorPage extends StatelessWidget {
   const CalculatorPage({Key? key}) : super(key: key);
@@ -108,6 +109,7 @@ Widget fuelDropDown(Size size, BuildContext context, List<String> list) {
             padding: EdgeInsets.only(right: size.width * 0.1),
             child: DropdownButtonHideUnderline(
               child: DropdownButton(
+                  style: Theme.of(context).textTheme.titleLarge,
                   items: list.map((data) {
                     return DropdownMenuItem(value: data, child: Text(data));
                   }).toList(),
@@ -133,48 +135,60 @@ Widget textField(Size size, BuildContext context) {
   return BlocBuilder<CalculatorBloc, CalculatorState>(
     builder: (context, state) {
       if (state is CalculatorInitial) {
-        return Row(
+        return Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             enterRupees(size, context, true, "0"),
             Padding(
-              padding: EdgeInsets.only(top: size.height * 0.05),
-              child: Icon(
-                Icons.compare_arrows_sharp,
-                size: size.height * 0.04,
-                color: Theme.of(context).primaryColorLight,
+              padding: EdgeInsets.only(
+                  top: size.height * 0.01, left: size.width * 0.2),
+              child: Transform(
+                transform: Matrix4.identity()..rotateZ(math.pi / 2),
+                child: Icon(
+                  Icons.compare_arrows_outlined,
+                  size: size.height * 0.04,
+                  color: Theme.of(context).primaryColorLight,
+                ),
               ),
             ),
             quantityLitres(size, context, true, "0")
           ],
         );
       } else if (state is CalculatorStateChange) {
-        return Row(
+        return Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             enterRupees(size, context, true),
             Padding(
-              padding: EdgeInsets.only(top: size.height * 0.05),
-              child: Icon(
-                Icons.compare_arrows_sharp,
-                size: size.height * 0.04,
-                color: Theme.of(context).primaryColorLight,
+              padding: EdgeInsets.only(
+                  top: size.height * 0.01, left: size.width * 0.2),
+              child: Transform(
+                transform: Matrix4.identity()..rotateZ(math.pi / 2),
+                child: Icon(
+                  Icons.compare_arrows_sharp,
+                  size: size.height * 0.04,
+                  color: Theme.of(context).primaryColorLight,
+                ),
               ),
             ),
             quantityLitres(size, context, false, state.value)
           ],
         );
       } else if (state is QuantityState) {
-        return Row(
+        return Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             enterRupees(size, context, false, state.value),
             Padding(
-              padding: EdgeInsets.only(top: size.height * 0.05),
-              child: Icon(
-                Icons.compare_arrows_sharp,
-                size: size.height * 0.04,
-                color: Theme.of(context).primaryColorLight,
+              padding: EdgeInsets.only(
+                  top: size.height * 0.01, left: size.width * 0.2),
+              child: Transform(
+                transform: Matrix4.identity()..rotateZ(math.pi / 2),
+                child: Icon(
+                  Icons.compare_arrows_sharp,
+                  size: size.height * 0.04,
+                  color: Theme.of(context).primaryColorLight,
+                ),
               ),
             ),
             quantityLitres(size, context, true)
@@ -186,11 +200,15 @@ Widget textField(Size size, BuildContext context) {
           children: [
             enterRupees(size, context, true, "0"),
             Padding(
-              padding: EdgeInsets.only(top: size.height * 0.05),
-              child: Icon(
-                Icons.compare_arrows_sharp,
-                size: size.height * 0.04,
-                color: Theme.of(context).primaryColorLight,
+              padding: EdgeInsets.only(
+                  top: size.height * 0.01, left: size.width * 0.2),
+              child: Transform(
+                transform: Matrix4.identity()..rotateZ(math.pi / 2),
+                child: Icon(
+                  Icons.compare_arrows_sharp,
+                  size: size.height * 0.04,
+                  color: Theme.of(context).primaryColorLight,
+                ),
               ),
             ),
             quantityLitres(size, context, false, "0")
@@ -210,8 +228,7 @@ Widget enterRupees(Size size, BuildContext context, bool isFoucesd,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Container(
-        margin:
-            EdgeInsets.only(top: size.height * 0.02, left: size.width * 0.06),
+        margin: EdgeInsets.only(top: size.height * 0.02),
         child: Text(
           "(NPR)",
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -220,9 +237,8 @@ Widget enterRupees(Size size, BuildContext context, bool isFoucesd,
         ),
       ),
       Container(
-        margin:
-            EdgeInsets.only(left: size.width * 0.06, top: size.height * 0.01),
-        width: size.width * 0.25,
+        margin: EdgeInsets.only(top: size.height * 0.01),
+        width: size.width * 0.9,
         height: size.height * 0.06,
         child: isFoucesd
             ? TextFormField(
@@ -295,8 +311,7 @@ Widget quantityLitres(Size size, BuildContext context, bool isFouced,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(
-                  top: size.height * 0.02, right: size.width * 0.06),
+              margin: EdgeInsets.only(top: size.height * 0.02),
               child: Text(
                 "Quantity(litres)",
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -305,9 +320,8 @@ Widget quantityLitres(Size size, BuildContext context, bool isFouced,
               ),
             ),
             Container(
-              margin: EdgeInsets.only(
-                  right: size.width * 0.06, top: size.height * 0.01),
-              width: size.width * 0.25,
+              margin: EdgeInsets.only(top: size.height * 0.01),
+              width: size.width * 0.9,
               height: size.height * 0.06,
               child: TextFormField(
                 style: Theme.of(context).textTheme.bodyLarge,
@@ -345,8 +359,7 @@ Widget quantityLitres(Size size, BuildContext context, bool isFouced,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(
-                  top: size.height * 0.02, right: size.width * 0.06),
+              margin: EdgeInsets.only(top: size.height * 0.02),
               child: Text(
                 "Quantity(litres)",
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -355,9 +368,8 @@ Widget quantityLitres(Size size, BuildContext context, bool isFouced,
               ),
             ),
             Container(
-              margin: EdgeInsets.only(
-                  right: size.width * 0.06, top: size.height * 0.01),
-              width: size.width * 0.25,
+              margin: EdgeInsets.only(top: size.height * 0.01),
+              width: size.width * 0.9,
               height: size.height * 0.06,
               child: TextFormField(
                 style: Theme.of(context).textTheme.bodyLarge,

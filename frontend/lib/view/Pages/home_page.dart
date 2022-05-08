@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:fuel_prices/view/Pages/calculator_page.dart';
 import 'package:fuel_prices/view/Pages/contributor_page.dart';
@@ -110,13 +109,13 @@ class DrawerPage extends StatelessWidget {
             "Contributor",
             const ContributorPage(),
           ),
-          drawerItem(
-            size,
-            context,
-            Icons.settings,
-            "Settings",
-            const SettingsPage(),
-          ),
+          // drawerItem(
+          //   size,
+          //   context,
+          //   Icons.settings,
+          //   "Settings",
+          //   const SettingsPage(),
+          // ),
           versionApp(context, size)
         ],
       ),
