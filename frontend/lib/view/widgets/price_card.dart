@@ -36,7 +36,7 @@ class PriceCard extends StatelessWidget {
             DummyData data = ListDummy.list[index];
             return Padding(
               padding: EdgeInsets.only(
-                  left: size.width * 0.01, right: size.width * 0.01),
+                  left: size.width * 0.04, right: size.width * 0.04),
               child: FuelPricesCard(
                 fuelName: data.name,
                 fuelPrice: data.price,
