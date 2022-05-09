@@ -10,6 +10,7 @@ GithubData _$GithubDataFromJson(Map<String, dynamic> json) => GithubData(
       login: json['login'] as String,
       avatarURL: json['avatar_url'] as String,
       contributions: json['contributions'] as num,
+      url: json['html_url'] as String,
     );
 
 Map<String, dynamic> _$GithubDataToJson(GithubData instance) =>
@@ -17,4 +18,5 @@ Map<String, dynamic> _$GithubDataToJson(GithubData instance) =>
       'login': instance.login,
       'avatar_url': instance.avatarURL,
       'contributions': instance.contributions,
+      'html_url': instance.url,
     };
