@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fuel_prices/view/Pages/home_page.dart';
 import 'package:fuel_prices/view/utils/app_theme.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
