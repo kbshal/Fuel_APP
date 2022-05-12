@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fuel_prices/model/Github/github_model.dart';
 import 'package:fuel_prices/services/github_contrib.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class ContributorPage extends StatefulWidget {
