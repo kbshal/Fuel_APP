@@ -12,3 +12,13 @@ app=FastAPI()
 async def main():
     data=await get_data()
     return data
+
+
+# test endpoint for evaluation
+
+
+
+@app.get('/test',reponse_class=JSONResponse)
+async def test_func():
+    data={"message":"Hello working fine"}
+    return data
